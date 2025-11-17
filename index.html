@@ -3,9 +3,1319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <meta name="description" content="Ladi's Place - A Traditional Seafood Restaurant in Puerto Rico. Visit one of our two seaside restaurants, discover the best-kept secrets of Puerto Rico with the freshest seafood, fantastic sunset views, live music, and excellent service since 1949.">
+    <meta name="keywords" content="Salinas, Mojo Isleño, Puerto Rico restaurant, seafood restaurant, Ladi's Place">
+    <title>Ladi's Place - Historic Seafood Restaurant | Salinas & San Juan, Puerto Rico</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Ocean Wave Background */
+        .ocean-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, #0a4d68 0%, #088395 40%, #05bfdb 70%, #00ffca 100%);
+        }
+
+        /* Animated waves */
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15vh;
+            min-height: 100px;
+            max-height: 150px;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background-repeat: repeat-x;
+            animation: wave-animation 25s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            animation-duration: 20s;
+            opacity: 0.5;
+            bottom: 10px;
+        }
+
+        .wave:nth-child(3) {
+            animation-duration: 30s;
+            opacity: 0.3;
+            bottom: 20px;
+        }
+
+        @keyframes wave-animation {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Floating particles */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-10px);
+            }
+            75% {
+                transform: translateY(-30px) translateX(5px);
+            }
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 77, 104, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Fade in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero section */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(10, 77, 104, 0.9) 0%, rgba(8, 131, 149, 0.8) 50%, rgba(5, 191, 219, 0.7) 100%);
+        }
+
+        /* Glass effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Image hover effects */
+        .image-hover {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-hover img {
+            transition: transform 0.6s ease;
+        }
+
+        .image-hover:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+        .btn-secondary {
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #0a4d68;
+            transform: translateY(-2px);
+        }
+
+        /* Location cards */
+        .location-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+            transition: all 0.4s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timeline styles */
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        /* Form styles */
+        input, textarea, select {
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #05bfdb;
+            box-shadow: 0 0 0 3px rgba(5, 191, 219, 0.1);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Menu tab styles */
+        .menu-tab {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .menu-tab.active {
+            border-bottom-color: #f5576c;
+            color: #f5576c;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a4d68;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #05bfdb;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ffca;
+        }
+    </style>
 </head>
 <body>
-    <!-- Content will be added here -->
+    <!-- Animated Ocean Background -->
+    <div class="ocean-background">
+        <canvas id="particleCanvas"></canvas>
+        <div class="waves">
+            <svg class="wave" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="rgba(255,255,255,0.1)"/>
+            </svg>
+            <svg class="wave" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,96L48,90.7C96,85,192,75,288,74.7C384,75,480,85,576,90.7C672,96,768,96,864,90.7C960,85,1056,75,1152,74.7C1248,75,1344,85,1392,90.7L1440,96L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="rgba(255,255,255,0.15)"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar fixed w-full top-0 z-50 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="text-white">
+                    <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Ladi's Place</h1>
+                    <p class="text-xs md:text-sm font-light tracking-widest opacity-90">SINCE 1949</p>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-white hover:text-[#00ffca] transition-colors font-light">Home</a>
+                <a href="#story" class="text-white hover:text-[#00ffca] transition-colors font-light">Our Story</a>
+                <a href="#menu" class="text-white hover:text-[#00ffca] transition-colors font-light">Menu</a>
+                <a href="#events" class="text-white hover:text-[#00ffca] transition-colors font-light">Events</a>
+                <a href="#reservations" class="btn-primary text-white px-6 py-3 rounded-full font-medium">Reserve Table</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-[#0a4d68] shadow-2xl z-50">
+            <div class="p-6">
+                <button id="closeMenuBtn" class="text-white float-right focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <div class="clear-both mt-12 space-y-6">
+                    <a href="#home" class="block text-white hover:text-[#00ffca] text-lg transition-colors mobile-link">Home</a>
+                    <a href="#story" class="block text-white hover:text-[#00ffca] text-lg transition-colors mobile-link">Our Story</a>
+                    <a href="#menu" class="block text-white hover:text-[#00ffca] text-lg transition-colors mobile-link">Menu</a>
+                    <a href="#events" class="block text-white hover:text-[#00ffca] text-lg transition-colors mobile-link">Events</a>
+                    <a href="#reservations" class="block btn-primary text-white px-6 py-3 rounded-full text-center mt-8">Reserve Table</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="hero-gradient absolute inset-0"></div>
+
+        <div class="relative z-10 text-center px-4 max-w-6xl mx-auto">
+            <h2 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
+                Welcome to Ladi's Place
+            </h2>
+            <p class="text-xl md:text-3xl text-white mb-4 font-light">
+                Home of the Famous Mojo Isleño
+            </p>
+            <p class="text-lg md:text-xl text-white mb-12 max-w-3xl mx-auto font-light opacity-95">
+                Authentic Puerto Rican Seafood Since 1949
+            </p>
+
+            <!-- Location Selector -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+                <!-- Salinas Location -->
+                <div class="location-card rounded-2xl p-8 text-left">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#0a4d68] mb-2">Salinas</h3>
+                            <p class="text-sm text-gray-600 font-semibold">THE ORIGINAL - EST. 1949</p>
+                        </div>
+                        <div class="bg-[#f5576c] text-white px-3 py-1 rounded-full text-xs font-bold">
+                            ORIGINAL
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Playa de Salinas - The birthplace of Mojo Isleño. Fresh daily catch from local fishermen.
+                    </p>
+                    <div class="flex items-center text-gray-600 mb-2">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="text-sm">Calle A-86, Salinas 00751</span>
+                    </div>
+                    <a href="tel:787-900-4563" class="inline-block mt-4 text-[#0a4d68] font-semibold hover:text-[#05bfdb] transition-colors">
+                        Call: 787-900-4563 →
+                    </a>
+                </div>
+
+                <!-- San Juan Location -->
+                <div class="location-card rounded-2xl p-8 text-left">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#0a4d68] mb-2">San Juan</h3>
+                            <p class="text-sm text-gray-600 font-semibold">PUERTA DE TIERRA</p>
+                        </div>
+                        <div class="bg-[#05bfdb] text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SEASIDE
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Puerta de Tierra - Breathtaking Caribbean Sea views. Perfect for sunset dining.
+                    </p>
+                    <div class="flex items-center text-gray-600 mb-2">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="text-sm">Av. Luis Muñoz Rivera, San Juan</span>
+                    </div>
+                    <a href="tel:787-824-1900" class="inline-block mt-4 text-[#0a4d68] font-semibold hover:text-[#05bfdb] transition-colors">
+                        Call: 787-824-1900 →
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#menu" class="btn-primary text-white px-10 py-4 rounded-full text-lg font-medium">
+                    View Our Menu
+                </a>
+                <a href="#story" class="btn-secondary text-white px-10 py-4 rounded-full text-lg font-medium">
+                    Our Story
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 scroll-indicator">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="py-24 md:py-32 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-6xl font-bold text-[#0a4d68] mb-6">Our Story</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#f5576c] to-[#05bfdb] mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    A legacy of fresh seafood and authentic Puerto Rican cuisine
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="max-w-5xl mx-auto">
+                <!-- 1949 -->
+                <div class="timeline-item mb-16 flex items-center">
+                    <div class="w-full md:w-1/2 md:pr-12 mb-4 md:mb-0 md:text-right">
+                        <div class="inline-block bg-[#0a4d68] text-white px-6 py-2 rounded-full mb-4 font-bold">
+                            1949
+                        </div>
+                        <h3 class="text-3xl font-bold text-[#0a4d68] mb-3">The Beginning</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Ladi's Place was founded in Salinas, Puerto Rico, establishing a tradition of serving the freshest seafood to locals and visitors alike. Our commitment to quality began on day one.
+                        </p>
+                    </div>
+                    <div class="hidden md:block w-px h-full bg-[#05bfdb] mx-auto"></div>
+                    <div class="hidden md:block w-1/2"></div>
+                </div>
+
+                <!-- Mojo Isleño -->
+                <div class="timeline-item mb-16 flex items-center flex-row-reverse">
+                    <div class="w-full md:w-1/2 md:pl-12">
+                        <div class="inline-block bg-[#f5576c] text-white px-6 py-2 rounded-full mb-4 font-bold">
+                            OUR SIGNATURE
+                        </div>
+                        <h3 class="text-3xl font-bold text-[#0a4d68] mb-3">Creator of Mojo Isleño</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            We proudly created the famous Mojo Isleño - a traditional Puerto Rican seafood sauce that has become legendary throughout the island. This signature dish represents our dedication to authentic island flavors.
+                        </p>
+                    </div>
+                    <div class="hidden md:block w-px h-full bg-[#05bfdb] mx-auto"></div>
+                    <div class="hidden md:block w-1/2"></div>
+                </div>
+
+                <!-- Expansion -->
+                <div class="timeline-item mb-16 flex items-center">
+                    <div class="w-full md:w-1/2 md:pr-12 mb-4 md:mb-0 md:text-right">
+                        <div class="inline-block bg-[#05bfdb] text-white px-6 py-2 rounded-full mb-4 font-bold">
+                            EXPANSION
+                        </div>
+                        <h3 class="text-3xl font-bold text-[#0a4d68] mb-3">San Juan Location</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            We expanded to Puerta de Tierra in San Juan, bringing our authentic seafood experience to the capital with breathtaking Caribbean Sea views and unforgettable sunsets.
+                        </p>
+                    </div>
+                    <div class="hidden md:block w-px h-full bg-[#05bfdb] mx-auto"></div>
+                    <div class="hidden md:block w-1/2"></div>
+                </div>
+
+                <!-- Today -->
+                <div class="timeline-item flex items-center flex-row-reverse">
+                    <div class="w-full md:w-1/2 md:pl-12">
+                        <div class="inline-block bg-[#0a4d68] text-white px-6 py-2 rounded-full mb-4 font-bold">
+                            TODAY
+                        </div>
+                        <h3 class="text-3xl font-bold text-[#0a4d68] mb-3">Fresh Daily Catch</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Local fishermen still provide us with the freshest catch every single day. Our commitment to quality, authentic preparation, and exceptional service continues to be the heart of everything we do.
+                        </p>
+                    </div>
+                    <div class="hidden md:block w-px h-full bg-[#05bfdb] mx-auto"></div>
+                    <div class="hidden md:block w-1/2"></div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mt-20 fade-in">
+                <div class="glass-card rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">🐟</div>
+                    <h4 class="text-2xl font-bold text-[#0a4d68] mb-3">Daily Fresh Catch</h4>
+                    <p class="text-gray-700">
+                        Local fishermen supply us with the freshest seafood every morning
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">🌊</div>
+                    <h4 class="text-2xl font-bold text-[#0a4d68] mb-3">Seaside Dining</h4>
+                    <p class="text-gray-700">
+                        Enjoy breathtaking ocean views and Caribbean sunsets at both locations
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">🎵</div>
+                    <h4 class="text-2xl font-bold text-[#0a4d68] mb-3">Live Music</h4>
+                    <p class="text-gray-700">
+                        Experience authentic Puerto Rican culture with live music performances
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 md:py-32 bg-gradient-to-b from-[#f8f9fa] to-white relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-6xl font-bold text-[#0a4d68] mb-6">Our Menu</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#f5576c] to-[#05bfdb] mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Fresh seafood prepared with authentic Puerto Rican tradition
+                </p>
+            </div>
+
+            <!-- Menu Tabs -->
+            <div class="flex justify-center mb-12 space-x-4 flex-wrap gap-4">
+                <button class="menu-tab active px-8 py-3 text-lg font-semibold text-gray-700" data-menu="salinas">
+                    Salinas Menu
+                </button>
+                <button class="menu-tab px-8 py-3 text-lg font-semibold text-gray-700" data-menu="sanjuan">
+                    San Juan Menu
+                </button>
+            </div>
+
+            <!-- Menu Content -->
+            <div class="max-w-5xl mx-auto">
+                <!-- Salinas Menu -->
+                <div id="menu-salinas" class="menu-content">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Signature Dishes -->
+                        <div class="fade-in">
+                            <h3 class="text-2xl font-bold text-[#0a4d68] mb-6 pb-3 border-b-2 border-[#05bfdb]">
+                                Signature Dishes
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Mojo Isleño</h4>
+                                        <span class="text-[#f5576c] font-bold">★ ORIGINAL</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Our famous signature sauce with fresh catch of the day - the dish that made us legendary
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Pescado Frito</h4>
+                                        <span class="text-[#05bfdb] font-bold">DAILY CATCH</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Whole fried fish, crispy outside and tender inside, served with tostones and mofongo
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Camarones al Ajillo</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Garlic shrimp sautéed in olive oil with Puerto Rican spices
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Mofongo Relleno</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Traditional mashed plantains stuffed with your choice of seafood
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fresh Seafood -->
+                        <div class="fade-in">
+                            <h3 class="text-2xl font-bold text-[#0a4d68] mb-6 pb-3 border-b-2 border-[#05bfdb]">
+                                Fresh Daily Catch
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Red Snapper</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Grilled, fried, or in Mojo Isleño sauce
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Caribbean Lobster</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Fresh lobster prepared to perfection
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Pulpo Guisado</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Octopus stew in traditional Puerto Rican style
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Seafood Paella</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        A Caribbean twist on the classic Spanish dish
+                                    </p>
+                                </div>
+
+                                <div class="bg-[#05bfdb] bg-opacity-10 p-4 rounded-lg mt-6">
+                                    <p class="text-sm text-gray-700 italic">
+                                        <strong>Daily Specials:</strong> Ask your server about today's fresh catch and chef's recommendations
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- San Juan Menu -->
+                <div id="menu-sanjuan" class="menu-content hidden">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Signature Dishes -->
+                        <div class="fade-in">
+                            <h3 class="text-2xl font-bold text-[#0a4d68] mb-6 pb-3 border-b-2 border-[#05bfdb]">
+                                Sunset Specials
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Mojo Isleño</h4>
+                                        <span class="text-[#f5576c] font-bold">★ SIGNATURE</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Our legendary sauce with premium seafood, served with ocean views
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Chillo Entero</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Whole red snapper, fried to perfection with arroz con gandules
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Asopao de Mariscos</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Seafood rice stew with local spices and fresh herbs
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Tostones Rellenos</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Plantain cups filled with your choice of seafood
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cocktails & Drinks -->
+                        <div class="fade-in">
+                            <h3 class="text-2xl font-bold text-[#0a4d68] mb-6 pb-3 border-b-2 border-[#05bfdb]">
+                                Cocktails & Beverages
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Piña Colada</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Classic Puerto Rican cocktail with fresh coconut and pineapple
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Sunset Mojito</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Fresh mint, lime, and rum - perfect for Caribbean sunsets
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Medalla Light</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Puerto Rico's favorite beer, ice cold
+                                    </p>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-lg font-bold text-gray-800">Fresh Fruit Juices</h4>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">
+                                        Passion fruit, tamarind, and tropical blends
+                                    </p>
+                                </div>
+
+                                <div class="bg-[#f5576c] bg-opacity-10 p-4 rounded-lg mt-6">
+                                    <p class="text-sm text-gray-700 italic">
+                                        <strong>Happy Hour:</strong> Join us for special cocktail prices during sunset hours
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-in">
+                <p class="text-gray-600 mb-6 italic">
+                    Menu items and availability may vary based on daily fresh catch
+                </p>
+                <a href="tel:787-900-4563" class="btn-primary text-white px-10 py-4 rounded-full text-lg font-medium inline-block">
+                    Call for Today's Specials
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events / Private Gatherings Section -->
+    <section id="events" class="py-24 md:py-32 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-6xl font-bold text-[#0a4d68] mb-6">Private Gatherings & Events</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#f5576c] to-[#05bfdb] mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Create unforgettable memories at one of Puerto Rico's most unique seaside venues
+                </p>
+            </div>
+
+            <!-- Event Types Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="fade-in glass-card rounded-2xl p-8 hover:shadow-2xl transition-all duration-300">
+                    <div class="text-5xl mb-4">💍</div>
+                    <h3 class="text-2xl font-bold text-[#0a4d68] mb-4">Weddings</h3>
+                    <p class="text-gray-700 mb-4">
+                        Say "I do" with spectacular sunset views and the Caribbean Sea as your backdrop. Our venues accommodate up to 500 guests.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>✓ Beachfront ceremony options</li>
+                        <li>✓ Indoor/outdoor reception spaces</li>
+                        <li>✓ Custom menu planning</li>
+                        <li>✓ Professional event coordination</li>
+                    </ul>
+                </div>
+
+                <div class="fade-in glass-card rounded-2xl p-8 hover:shadow-2xl transition-all duration-300">
+                    <div class="text-5xl mb-4">🎉</div>
+                    <h3 class="text-2xl font-bold text-[#0a4d68] mb-4">Social Events</h3>
+                    <p class="text-gray-700 mb-4">
+                        Birthdays, quinceañeras, anniversaries, and family celebrations. Make every moment special.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>✓ Private dining rooms</li>
+                        <li>✓ Live music arrangements</li>
+                        <li>✓ Customizable packages</li>
+                        <li>✓ Decorations & entertainment</li>
+                    </ul>
+                </div>
+
+                <div class="fade-in glass-card rounded-2xl p-8 hover:shadow-2xl transition-all duration-300">
+                    <div class="text-5xl mb-4">💼</div>
+                    <h3 class="text-2xl font-bold text-[#0a4d68] mb-4">Corporate Events</h3>
+                    <p class="text-gray-700 mb-4">
+                        Impress clients and reward your team with a unique waterfront venue that inspires success.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>✓ Team building activities</li>
+                        <li>✓ Product launches</li>
+                        <li>✓ Networking receptions</li>
+                        <li>✓ AV equipment available</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Venue Capacity -->
+            <div class="max-w-4xl mx-auto mb-16 fade-in">
+                <div class="bg-gradient-to-r from-[#0a4d68] to-[#088395] rounded-2xl p-8 md:p-12 text-white">
+                    <h3 class="text-3xl font-bold mb-6 text-center">Salinas Venue Capacity</h3>
+                    <div class="grid md:grid-cols-4 gap-6 text-center">
+                        <div>
+                            <div class="text-4xl font-bold mb-2">500</div>
+                            <div class="text-sm opacity-90">Main Hall</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold mb-2">250</div>
+                            <div class="text-sm opacity-90">Adjacent Room</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold mb-2">150</div>
+                            <div class="text-sm opacity-90">Medium Hall</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold mb-2">100</div>
+                            <div class="text-sm opacity-90">Private Room (A/C)</div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-8 opacity-90">
+                        Flexible spaces to accommodate intimate gatherings or large celebrations
+                    </p>
+                </div>
+            </div>
+
+            <!-- Event Inquiry Form -->
+            <div class="max-w-3xl mx-auto fade-in">
+                <div class="bg-gradient-to-b from-gray-50 to-white rounded-2xl p-8 md:p-12 shadow-xl">
+                    <h3 class="text-3xl font-bold text-[#0a4d68] mb-6 text-center">Plan Your Event</h3>
+                    <p class="text-center text-gray-600 mb-8">
+                        Fill out the form below and our events coordinator will contact you shortly
+                    </p>
+
+                    <form id="eventForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                                <input type="email" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200" placeholder="your@email.com">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200" placeholder="(787) 000-0000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Event Type *</label>
+                                <select required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200">
+                                    <option value="">Select event type</option>
+                                    <option>Wedding</option>
+                                    <option>Birthday Party</option>
+                                    <option>Quinceañera</option>
+                                    <option>Corporate Event</option>
+                                    <option>Anniversary</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Event Date *</label>
+                                <input type="date" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Number of Guests *</label>
+                                <input type="number" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200" placeholder="50">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Location Preference *</label>
+                            <select required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200">
+                                <option value="">Select location</option>
+                                <option>Salinas - Playa de Salinas</option>
+                                <option>San Juan - Puerta de Tierra</option>
+                                <option>Either Location</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tell us about your event *</label>
+                            <textarea required rows="4" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200" placeholder="Share your vision, special requests, and any questions you have..."></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn-primary text-white px-12 py-4 rounded-full text-lg font-medium">
+                                Submit Inquiry
+                            </button>
+                        </div>
+
+                        <p class="text-sm text-gray-600 text-center mt-4">
+                            Or call our Events Coordinator directly: <a href="tel:787-900-4563" class="text-[#05bfdb] font-semibold">787-900-4563</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations Section -->
+    <section id="reservations" class="py-24 md:py-32 bg-gradient-to-b from-[#f8f9fa] to-white relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-6xl font-bold text-[#0a4d68] mb-6">Make a Reservation</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#f5576c] to-[#05bfdb] mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Reserve your table today and experience the freshest seafood in Puerto Rico
+                </p>
+            </div>
+
+            <!-- Reservation Cards -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+                <!-- Salinas Reservation -->
+                <div class="fade-in bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-[#0a4d68] to-[#088395] p-8 text-white">
+                        <h3 class="text-3xl font-bold mb-2">Salinas</h3>
+                        <p class="text-sm opacity-90">Playa de Salinas - The Original</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-[#05bfdb] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Hours</p>
+                                    <p class="text-gray-600 text-sm">Sunday-Thursday: 11:00 AM - 10:00 PM</p>
+                                    <p class="text-gray-600 text-sm">Friday-Saturday: 11:00 AM - 12:00 AM</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-[#05bfdb] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Address</p>
+                                    <p class="text-gray-600 text-sm">Calle A-86, Playa de Salinas</p>
+                                    <p class="text-gray-600 text-sm">Salinas, Puerto Rico 00751</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-[#05bfdb] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Phone</p>
+                                    <a href="tel:787-900-4563" class="text-[#05bfdb] hover:text-[#0a4d68] font-semibold">787-900-4563</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="tel:787-900-4563" class="block w-full btn-primary text-white text-center px-8 py-4 rounded-full text-lg font-medium">
+                            Call to Reserve
+                        </a>
+                    </div>
+                </div>
+
+                <!-- San Juan Reservation -->
+                <div class="fade-in bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-[#05bfdb] to-[#00ffca] p-8 text-white">
+                        <h3 class="text-3xl font-bold mb-2">San Juan</h3>
+                        <p class="text-sm opacity-90">Puerta de Tierra - Sunset Views</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-[#05bfdb] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Hours</p>
+                                    <p class="text-gray-600 text-sm">Sunday-Thursday: 11:00 AM - 10:00 PM</p>
+                                    <p class="text-gray-600 text-sm">Friday-Saturday: 11:00 AM - 12:00 AM</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-[#05bfdb] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Address</p>
+                                    <p class="text-gray-600 text-sm">Avenida Luis Muñoz Rivera</p>
+                                    <p class="text-gray-600 text-sm">San Juan, 00907, Puerto Rico</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-[#05bfdb] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Phone</p>
+                                    <a href="tel:787-824-1900" class="text-[#05bfdb] hover:text-[#0a4d68] font-semibold">787-824-1900</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="tel:787-824-1900" class="block w-full btn-primary text-white text-center px-8 py-4 rounded-full text-lg font-medium">
+                            Call to Reserve
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h4 class="text-2xl font-bold text-[#0a4d68] mb-4">Walk-ins Welcome!</h4>
+                    <p class="text-gray-700 mb-6">
+                        While we recommend reservations for large parties and weekends, we happily welcome walk-in guests. Our team will do everything possible to accommodate you.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="mailto:ladisrest@gmail.com" class="text-[#05bfdb] hover:text-[#0a4d68] font-semibold inline-flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            ladisrest@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a4d68] text-white py-16 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <!-- About -->
+                <div class="md:col-span-2">
+                    <h3 class="text-3xl font-bold mb-4">Ladi's Place</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        Since 1949, we've been serving the freshest seafood and authentic Puerto Rican cuisine at our two beautiful seaside locations. Come discover why we're home to the famous Mojo Isleño.
+                    </p>
+                    <p class="text-sm text-gray-400 italic">
+                        "este negocio es 100% puertorriqueño"
+                    </p>
+                </div>
+
+                <!-- Salinas -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Salinas</h4>
+                    <div class="space-y-2 text-gray-300 text-sm">
+                        <p>Calle A-86</p>
+                        <p>Playa de Salinas</p>
+                        <p>Salinas, PR 00751</p>
+                        <p class="pt-2">
+                            <a href="tel:787-900-4563" class="text-[#00ffca] hover:text-white transition-colors">
+                                787-900-4563
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- San Juan -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">San Juan</h4>
+                    <div class="space-y-2 text-gray-300 text-sm">
+                        <p>Av. Luis Muñoz Rivera</p>
+                        <p>Puerta de Tierra</p>
+                        <p>San Juan, PR 00907</p>
+                        <p class="pt-2">
+                            <a href="tel:787-824-1900" class="text-[#00ffca] hover:text-white transition-colors">
+                                787-824-1900
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="border-t border-gray-600 pt-8 mb-8">
+                <div class="grid md:grid-cols-2 gap-6 text-center md:text-left">
+                    <div>
+                        <h5 class="font-bold mb-2">Restaurant Hours</h5>
+                        <p class="text-gray-300 text-sm">Sunday - Thursday: 11:00 AM - 10:00 PM</p>
+                        <p class="text-gray-300 text-sm">Friday - Saturday: 11:00 AM - 12:00 AM</p>
+                    </div>
+                    <div>
+                        <h5 class="font-bold mb-2">Contact</h5>
+                        <p class="text-gray-300 text-sm">Events: <a href="tel:787-900-4563" class="text-[#00ffca] hover:text-white">787-900-4563</a></p>
+                        <p class="text-gray-300 text-sm">Email: <a href="mailto:ladisrest@gmail.com" class="text-[#00ffca] hover:text-white">ladisrest@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gray-600 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Ladi's Place. All Rights Reserved. | A Puerto Rican Tradition Since 1949</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ========== PARTICLE CANVAS ANIMATION ==========
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.color = ['rgba(255, 255, 255, 0.6)', 'rgba(0, 255, 202, 0.4)', 'rgba(5, 191, 219, 0.4)'][Math.floor(Math.random() * 3)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wave motion
+                this.x += Math.sin(Date.now() * 0.001 + this.y * 0.01) * 0.2;
+                this.y += Math.cos(Date.now() * 0.001 + this.x * 0.01) * 0.2;
+
+                // Wrap around
+                if (this.x < -20) this.x = canvas.width + 20;
+                if (this.x > canvas.width + 20) this.x = -20;
+                if (this.y < -20) this.y = canvas.height + 20;
+                if (this.y > canvas.height + 20) this.y = -20;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const particles = [];
+        const particleCount = window.innerWidth < 768 ? 30 : 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========== MOBILE MENU ==========
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ========== SMOOTH SCROLLING ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========== MENU TABS ==========
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuSalinas = document.getElementById('menu-salinas');
+        const menuSanJuan = document.getElementById('menu-sanjuan');
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active from all tabs
+                menuTabs.forEach(t => t.classList.remove('active'));
+
+                // Add active to clicked tab
+                tab.classList.add('active');
+
+                // Show corresponding menu
+                const menuType = tab.getAttribute('data-menu');
+                if (menuType === 'salinas') {
+                    menuSalinas.classList.remove('hidden');
+                    menuSanJuan.classList.add('hidden');
+                } else {
+                    menuSalinas.classList.add('hidden');
+                    menuSanJuan.classList.remove('hidden');
+                }
+            });
+        });
+
+        // ========== EVENT FORM SUBMISSION ==========
+        const eventForm = document.getElementById('eventForm');
+
+        eventForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Show success message
+            alert('Thank you for your inquiry! Our events coordinator will contact you shortly at the phone number or email provided.');
+
+            // Reset form
+            eventForm.reset();
+        });
+
+        // ========== PRELOAD IMAGES ==========
+        window.addEventListener('load', () => {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
